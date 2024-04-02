@@ -1,0 +1,27 @@
+- name: Install flatpak
+  become: true
+  package:
+    name:
+      - flatpak
+  tags:
+    - flatpak
+    - install
+
+- name: Add flathub repo
+  become: true
+  shell: flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+  tags:
+    - flatpak
+    - install
+
+- name: Install flatpak GUI extras
+  flatpak:
+    name:
+      - com.github.tchx84.Flatseal
+      - com.visualstudio.code
+      - us.zoom.Zoom
+    method: user
+  tags:
+    - flatpak
+    - install
+    - gui-extras

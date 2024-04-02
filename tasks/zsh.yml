@@ -1,0 +1,31 @@
+---
+- name: Install Zsh
+  become: yes
+  apt:
+    name: zsh
+    state: present
+
+- name: Get the Zsh path
+  command: which zsh
+  register: zsh_path
+
+- name: Change the default shell to zsh for the current user
+  become: yes
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+
+- name: Clone zsh-autosuggestions repository
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "{{ ansible_env.HOME }}/.zsh/zsh-autosuggestions"
+    version: master
+  become: false
+
+- name: Add zsh-autosuggestions source to zshrc
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: "source {{ ansible_env.HOME }}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    create: yes
+  become: false
+

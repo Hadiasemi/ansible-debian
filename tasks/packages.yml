@@ -1,0 +1,18 @@
+---
+- name: Install packages
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ packages_to_install }}"
+    state: present
+    update_cache: yes
+
+- name: Install GUI packages
+  become: yes
+  ansible.builtin.apt:
+    name: "{{ gui_utils }}"
+    state: present
+    update_cache: yes
+
+- name: Install podman-compose
+  ansible.builtin.command:
+    cmd: pipx install podman-compose

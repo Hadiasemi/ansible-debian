@@ -1,0 +1,9 @@
+---
+- name: Download and execute the Starship install script
+  ansible.builtin.shell: |
+    curl -sS https://starship.rs/install.sh | sh -s -- -y
+  args:
+    warn: false  # Use with caution; only set to false if you understand the implications
+    executable: /bin/bash
+  become: yes  # Executes the command as root; adjust as necessary
+

@@ -1,0 +1,6 @@
+---
+- name: Execute system.sh content directly
+  ansible.builtin.shell:
+    cmd: "{{ playbook_dir }}/tasks/system.sh"
+  
+

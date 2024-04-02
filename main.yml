@@ -1,0 +1,14 @@
+---
+- name: Configure the debian system
+  hosts: localhost
+
+  tasks:
+    - name: Include all vars
+      include_vars: "{{ item }}"
+      loop: "{{ query('fileglob', 'vars/*.yml') }}"
+
+    - name: Include all tasks dynamically
+      include_tasks: "{{ item }}"
+      loop: "{{ query('fileglob', 'tasks/*.yml') }}"
+
+

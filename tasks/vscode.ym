@@ -1,0 +1,32 @@
+---
+- name: Install vscode
+  get_url:
+    url: https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
+    dest: /tmp/vscode.deb
+    mode: '+x'
+  when: ansible_os_family == "Debian"
+  tags: [vscode]
+
+
+- name: Install deb package for vscode
+  ansible.builtin.apt:
+    deb: /tmp/vscode.deb
+    state: present
+    update_cache: yes
+  become: true
+  when: ansible_os_family == "Debian"
+  tags: [vscode]
+
+
+- name: Install VSCode package
+  become: true
+  package:
+    name: code
+    state: present
+  when: ansible_os_family == "Archlinux"
+  tags: [vscode]
+
+# - name: Plugin vscode
+#   shell: "code --install-extension {{ item }}"
+#   loop: "{{ Plugins }}"
+
