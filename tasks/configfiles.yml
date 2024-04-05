@@ -1,0 +1,42 @@
+---
+- name: Remove existant config files
+  file:
+    path: " {{ item.path }}"
+    state: absent
+  with_items:
+    - { path: "{{ lookup('env', 'HOME') }}/.config/picom.conf" }
+    - { path: "{{ lookup('env', 'HOME') }}/.xinitrc" }
+    - { path: "{{ lookup('env', 'HOME') }}/.Xresources" }
+    - { path: "{{ lookup('env', 'HOME') }}/.screenlayout" }
+    - { path: "{{ lookup('env', 'HOME') }}/.fonts" }
+    - { path: "{{ lookup('env', 'HOME') }}/.config/i3" }
+    - { path: "{{ lookup('env', 'HOME') }}/.config/i3blocks" }
+    - { path: "{{ lookup('env', 'HOME') }}/.local/bin/scripts" }
+    - { path: "{{ lookup('env', 'HOME') }}/.zshrc" }
+    - { path: "{{ lookup('env', 'HOME') }}/.config/rofi" }
+
+- name: Copy config files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: "{{ playbook_dir }}/files/picom.conf", dest: "{{ lookup('env', 'HOME') }}/.config" }
+    - { src: "{{ playbook_dir }}/files/.xinitrc", dest: "{{ lookup('env', 'HOME') }}" }
+    - { src: "{{ playbook_dir }}/files/.Xresources", dest: "{{ lookup('env', 'HOME') }}" }
+    - { src: "{{ playbook_dir }}/files/.screenlayout", dest: "{{ lookup('env', 'HOME') }}" }
+    - { src: "{{ playbook_dir }}/files/.fonts", dest: "{{ lookup('env', 'HOME') }}" }
+    - { src: "{{ playbook_dir }}/files/i3", dest: "{{ lookup('env', 'HOME') }}/.config" }
+    - { src: "{{ playbook_dir }}/files/i3blocks", dest: "{{ lookup('env', 'HOME') }}/.config" }
+    - { src: "{{ playbook_dir }}/files/.zshrc", dest: "{{ lookup('env', 'HOME') }}" }
+    - { src: "{{ playbook_dir }}/files/rofi", dest: "{{ lookup('env', 'HOME') }}/.config" }
+
+- name: Copy config files with exec perms
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: u+rwx
+  with_items:
+    - { src: "{{ playbook_dir }}/files/scripts", dest: "{{ lookup('env', 'HOME') }}/.local/bin" }
+
+- name: Rebuilt font cache
+  shell: "fc-cache -fv"

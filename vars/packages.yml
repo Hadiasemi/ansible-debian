@@ -37,7 +37,11 @@ packages_to_install:
   - wget
   - zsh
 
+
 gui_utils:
+  - i3blocks
+  - arandr
+  - pavucontrol
   - alsa-utils
   - feh
   - fonts-noto-color-emoji
@@ -51,6 +55,7 @@ gui_utils:
   - libxft-dev
   - libxinerama-dev
   - libxkbcommon-x11-dev 
+  - rofi
   - libxrandr-dev
   - libxtst-dev
   - numlockx
@@ -67,8 +72,6 @@ gui_utils:
   - xfonts-terminus
   - xinit
   - xinput
-  - xscreensaver
-  - xscreensaver-data-extra
   - xserver-xorg-core
   - xserver-xorg-input-libinput
   - xutils-dev
