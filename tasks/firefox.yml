@@ -17,6 +17,7 @@
       - "multi-account"
       - "grammarly-1"
       - "simplelogin"
+      - "simplify-jobs"
   template:
     src: '{{ playbook_dir }}/templates/policies.json.j2'
     dest: '/etc/firefox/policies/policies.json'
