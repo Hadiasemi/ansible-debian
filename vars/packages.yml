@@ -39,6 +39,7 @@ packages_to_install:
 
 
 gui_utils:
+  - fontconfig
   - i3blocks
   - arandr
   - pavucontrol
