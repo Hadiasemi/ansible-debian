@@ -14,6 +14,7 @@
     - { path: "{{ lookup('env', 'HOME') }}/.local/bin/scripts" }
     - { path: "{{ lookup('env', 'HOME') }}/.zshrc" }
     - { path: "{{ lookup('env', 'HOME') }}/.config/rofi" }
+    - { path: "{{ lookup('env', 'HOME') }} ~/Photos" }
 
 - name: Copy config files
   copy:
@@ -25,6 +26,7 @@
     - { src: "{{ playbook_dir }}/files/.Xresources", dest: "{{ lookup('env', 'HOME') }}" }
     - { src: "{{ playbook_dir }}/files/.screenlayout", dest: "{{ lookup('env', 'HOME') }}" }
     - { src: "{{ playbook_dir }}/files/.fonts", dest: "{{ lookup('env', 'HOME') }}" }
+    - { src: "{{ playbook_dir }}/files/wallpapers", dest: "{{ lookup('env', 'HOME')/Photos/ }}" }
     - { src: "{{ playbook_dir }}/files/i3", dest: "{{ lookup('env', 'HOME') }}/.config" }
     - { src: "{{ playbook_dir }}/files/i3blocks", dest: "{{ lookup('env', 'HOME') }}/.config" }
     - { src: "{{ playbook_dir }}/files/.zshrc", dest: "{{ lookup('env', 'HOME') }}" }
