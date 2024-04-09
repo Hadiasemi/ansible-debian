@@ -7,8 +7,11 @@
       include_vars: "{{ item }}"
       loop: "{{ query('fileglob', 'vars/*.yml') }}"
 
+    - name: Run package.yml first
+      include_tasks: "tasks/package.yml"
+
     - name: Include all tasks dynamically
       include_tasks: "{{ item }}"
-      loop: "{{ query('fileglob', 'tasks/*.yml') }}"
+      loop: "{{ query('fileglob', 'tasks/*.yml') | difference(['tasks/package.yml']) }}"
 
 
