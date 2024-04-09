@@ -1,7 +1,7 @@
 ---
 - name: Add official Debian repository
   package:
-    name: firefox-esr-l10n-en-ca
+    name: firefox-esr
     state: present
   become: yes
 
